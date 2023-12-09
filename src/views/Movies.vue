@@ -15,7 +15,7 @@
 <template>
     <div>
       <h1 class="heading pl-10">Movies</h1>
-      <div class="grid grid-cols-4 ">
+      <div class="grid grid-cols-3  ">
         <MovieCard v-for="movie in movieList" :key="movie.id" :movie="movie" />
 
       </div>

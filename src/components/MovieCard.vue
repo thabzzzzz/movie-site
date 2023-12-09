@@ -6,12 +6,12 @@
 
 <template>
     <div class="p-10">
-      <div class="max-w-sm rounded overflow-hidden shadow-lg">
-        <img class="w-full card-img" :src="movie.poster" :alt="movie.title">
+      <div class="max-w-sm rounded overflow-hidden shadow-lg ">
+        <img class="w-full card-img mx-auto" :src="movie.poster" :alt="movie.title">
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">{{ movie.title }}</div>
-       <span>{{ movie.runtime }}</span>
-       <span>{{ movie.year }}</span>
+        <p>Runtime: <i>{{ movie.runtime }}</i> </p>  
+        <p>Year: <i>{{ movie.year }}</i></p> 
       </div>
     </div>
     </div>

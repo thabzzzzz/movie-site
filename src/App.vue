@@ -3,7 +3,7 @@
 </script>
 
 <template>
- <div class="max-w-7xl mx-auto">
+ <div class="max-w-100 mx-auto">
   <RouterView/>
  </div>
  

@@ -19,9 +19,9 @@
         
         </div>
         <div>
-          <div class="text-sm text-gray-400">Series</div>
+          <div class="text-sm text-gray-400 genre"> {{ movie.type}}</div>
           <div class="text-lg text-gray-800">{{ movie.year }}</div> <br>
-          <div class="bg-yellow-400 font-bold rounded-xl p-2 w-12 text-center ">7.2</div>
+          <div class="bg-yellow-400 font-bold rounded-xl p-2 w-12 text-center ">{{movie.rating}}</div>
         </div>
         
       </div>
@@ -41,5 +41,9 @@
 
   .movie-card{
     height: 400px;
+  }
+
+  .genre{
+    text-transform: capitalize;
   }
 </style>

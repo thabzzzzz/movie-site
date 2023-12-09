@@ -1,0 +1,39 @@
+{
+    "movies":[
+        {
+            "id":1,
+            "title":"The Lion King",
+            "year":"2019",
+            "runtime":"118 min",
+            "poster":"https://m.media-amazon.com/images/I/61jkTiX8NuL._AC_UF894,1000_QL80_.jpg"
+        },
+        {
+            "id":2,
+            "title":"Prometheus",
+            "year":"2012",
+            "runtime":"140 min",
+            "poster":"https://m.media-amazon.com/images/I/71OBE-OphQL._AC_UF894,1000_QL80_.jpg"
+        },
+        {
+            "id":3,
+            "title":"Mortal Kombat",
+            "year":"2021",
+            "runtime":"109 min",
+            "poster":"https://m.media-amazon.com/images/I/71WGVVaJ4uL._AC_UF894,1000_QL80_.jpg"
+        },
+        {
+            "id":4,
+            "title":"Terminator",
+            "year":"1984",
+            "runtime":"94 min",
+            "poster":"https://m.media-amazon.com/images/I/71K8nUXLivL._AC_UF894,1000_QL80_.jpg"
+        },
+        {
+            "id":5,
+            "title":"Alien",
+            "year":"1970",
+            "runtime":"102 min",
+            "poster":"https://m.media-amazon.com/images/I/51Tlyo9uh+L._AC_UF894,1000_QL80_.jpg"
+        }
+    ]
+}

@@ -12,6 +12,7 @@ const routes = [
     {path:"/",component:Home},
     {path:"/about",component:() => import('../views/About.vue')},
     {path:"/movies",component:() => import('../views/Movies.vue')},
+    {path:"/movies/:id",component:() => import('../views/MovieDetails.vue')},
 ]
 
 

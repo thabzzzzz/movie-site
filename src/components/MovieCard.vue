@@ -1,4 +1,6 @@
 <script setup>
+import MovieDetails from '../views/MovieDetails.vue';
+
   defineProps({
     movie:Object
   })
@@ -16,7 +18,7 @@
       <div class="flex flex-col w-1/2 space-y-4">
         <div class="flex justify-between items-start">
 
-        <RouterLink :to="`/movies/${movie.id}`">
+        <RouterLink :to="{name:'MovieDetails', params:{id:movie.id}}">
           <h2 class=" font-bold">{{movie.title}}</h2>
         </RouterLink>
         

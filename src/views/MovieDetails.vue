@@ -23,8 +23,13 @@
             <div class="deets">
                 {{ queryMovie.genre }}
             </div>
-
+            <div class="deets">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="$router.back()">
+                Back
+                </button>
+            </div>
         </div>
+     
     </div>
 </div>
     </section>
@@ -32,7 +37,7 @@
 
 <script setup>
     import { ref,onMounted } from 'vue'
-    import {useRoute} from 'vue-router'
+    import {useRouter} from 'vue-router'
 
     const props = defineProps({
         id:{
@@ -44,15 +49,19 @@
 
     const queryMovie = ref([])
     const isLoading = ref(true)
-    const route = useRoute()
+    const router = useRouter()
+   
 
     onMounted(async()=>
     {
         const result = await fetch(`http://localhost:3000/movies/${parseInt(props.id)}`);
+        if (result.status===404){
+            router.push({name:'NotFound'})
+        }
         const response =  await result.json();
         queryMovie.value= response;
         isLoading.value=false;
-        console.log(response);
+       
     }
     )
 

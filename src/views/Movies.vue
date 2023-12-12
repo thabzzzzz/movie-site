@@ -4,6 +4,7 @@
 
     const movieList = ref([]);
     const isLoading = ref(true);
+    const selectedSort = ref('');
 
     onMounted( async()=>{
      const result = await    fetch('http://localhost:3000/movies')
@@ -11,11 +12,27 @@
     movieList.value = respose;
     isLoading.value= false;
     })
+
+    const sortMovies = () => {
+    if (selectedSort.value === 'name') {
+      movieList.value.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (selectedSort.value === 'rating') {
+      movieList.value.sort((a, b) => b.rating - a.rating);
+    }
+  };
 </script>
 
 <template>
     <div>
       <h1 class="heading pl-10">Movies</h1>
+      <div class="flex items-center justify-center mb-4">
+      <span class="mr-2">Sort by:</span>
+      <select v-model="selectedSort" @change="sortMovies">
+        <option value="">Select</option>
+        <option value="name">Name</option>
+        <option value="rating">Rating</option>
+      </select>
+    </div>
       <div class="max-w-sm mx-auto" v-if="isLoading" >
         <span class="text-2xl font-bold text-black-700"  >Now loading...</span>
       </div>

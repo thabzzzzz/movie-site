@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: satoshi;
+    src: url(./assets/fonts/satoshi.ttf);
+}
+
+#navbar-default,.site-name{
+    font-family: satoshi;
+    font-size: 30px;
+}

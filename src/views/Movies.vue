@@ -32,12 +32,13 @@
   
     autoAnimate(container.value);
   };
+  
 </script>
 
 <template>
-    <div>
-      <h1 class="heading pl-10">Trending</h1>
-      <div class="flex items-center justify-center mb-4">
+    <div  >
+      <h1 class="heading pl-10" >Trending</h1>
+      <div class="flex items-center justify-center mb-4" >
       <span class="mr-2">Sort by:</span>
       <select v-model="selectedSort" @change="sortMovies">
         <option value="">Select</option>
@@ -48,7 +49,7 @@
       <div class="max-w-sm mx-auto" v-if="isLoading" >
         <span class="text-2xl font-bold text-black-700"  >Now loading...</span>
       </div>
-      <div class="grid grid-cols-3   "  v-else ref="container" >
+      <div class="grid grid-cols-3   "  v-else ref="container" data-aos="fade-up" >
         <MovieCard v-for="movie in movieList" :key="movie.id" :movie="movie"  />
 
       </div>

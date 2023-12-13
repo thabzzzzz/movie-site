@@ -1,10 +1,12 @@
 <script setup>
     import { ref, onMounted } from 'vue'
     import MovieCard from '../components/MovieCard.vue';
+    import autoAnimate from "@formkit/auto-animate"
 
     const movieList = ref([]);
     const isLoading = ref(true);
     const selectedSort = ref('');
+    let container= ref();
 
     onMounted( async()=>{
      const result = await    fetch('http://localhost:3000/movies')
@@ -19,6 +21,8 @@
     } else if (selectedSort.value === 'rating') {
       movieList.value.sort((a, b) => b.rating - a.rating);
     }
+  
+    autoAnimate(container.value);
   };
 </script>
 
@@ -36,8 +40,8 @@
       <div class="max-w-sm mx-auto" v-if="isLoading" >
         <span class="text-2xl font-bold text-black-700"  >Now loading...</span>
       </div>
-      <div class="grid grid-cols-3   "  v-else>
-        <MovieCard v-for="movie in movieList" :key="movie.id" :movie="movie" />
+      <div class="grid grid-cols-3   "  v-else ref="container" >
+        <MovieCard v-for="movie in movieList" :key="movie.id" :movie="movie"  />
 
       </div>
     </div>

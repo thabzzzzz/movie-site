@@ -7,6 +7,11 @@
     src: url(./assets/fonts/satoshi.ttf);
 }
 
+:root {
+    --textcolor: #201f1d;
+    --white: #ffffff;
+  }
+
 #navbar-default,.site-name{
     font-family: satoshi;
     font-size: 30px;

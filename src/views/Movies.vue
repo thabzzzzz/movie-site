@@ -8,18 +8,26 @@
     const selectedSort = ref('');
     let container= ref();
 
-    onMounted( async()=>{
-     const result = await    fetch('http://localhost:3000/movies')
-     const respose = await result.json();
-    movieList.value = respose;
-    isLoading.value= false;
-    })
+    onMounted(async () => {
+    const apiKey = '672d8a2f825f32332973ed7e2de2efa1'; // Replace with your actual TMDb API key
+    const apiUrl = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=${apiKey}`;
+    
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      movieList.value = data.results;
+      isLoading.value = false;
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+      isLoading.value = false;
+    }
+  });
 
     const sortMovies = () => {
     if (selectedSort.value === 'name') {
       movieList.value.sort((a, b) => a.title.localeCompare(b.title));
     } else if (selectedSort.value === 'rating') {
-      movieList.value.sort((a, b) => b.rating - a.rating);
+      movieList.value.sort((a, b) => b.vote_average - a.vote_average);
     }
   
     autoAnimate(container.value);
@@ -28,7 +36,7 @@
 
 <template>
     <div>
-      <h1 class="heading pl-10">Movies</h1>
+      <h1 class="heading pl-10">Trending</h1>
       <div class="flex items-center justify-center mb-4">
       <span class="mr-2">Sort by:</span>
       <select v-model="selectedSort" @change="sortMovies">

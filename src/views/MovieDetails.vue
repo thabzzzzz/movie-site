@@ -8,7 +8,7 @@
     <div class="grid grid-cols-2 gap-2 mb-10" v-else >
         <div class="ml-10"><h1 class="heading">{{queryMovie.title}}</h1>
         
-            <div><img class="poster" :src="queryMovie.poster" :alt="queryMovie.title"></div>
+            <div><img class="poster" :src="`https://image.tmdb.org/t/p/original${queryMovie.poster_path}`" :alt="queryMovie.title"></div>
         
         </div>
         
@@ -18,7 +18,7 @@
             </div>
             <br>
             <div class="deets">
-                {{ queryMovie.rating }}
+                {{ queryMovie.release_date }}
             </div>
             <div class="deets">
                 {{ queryMovie.genre }}
@@ -52,18 +52,23 @@
     const router = useRouter()
    
 
-    onMounted(async()=>
-    {
-        const result = await fetch(`http://localhost:3000/movies/${parseInt(props.id)}`);
-        if (result.status===404){
-            router.push({name:'NotFound'})
-        }
-        const response =  await result.json();
-        queryMovie.value= response;
-        isLoading.value=false;
-       
+    onMounted(async () => {
+  try {
+    const movieId = props.id; // Get the movie ID from props
+    const apiKey = '672d8a2f825f32332973ed7e2de2efa1'; // Replace with your actual TMDb API key
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`);
+    const data = await response.json();
+    if (response.ok) {
+      queryMovie.value = data; // Fetch specific movie details based on movieId
+    } else {
+      router.push({ name: 'NotFound' });
     }
-    )
+    isLoading.value = false;
+  } catch (error) {
+    console.error("Error fetching movie details:", error);
+    isLoading.value = false;
+  }
+});
 
     
 </script>

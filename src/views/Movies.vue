@@ -24,6 +24,8 @@
     }
   });
 
+  
+
     const sortMovies = () => {
     if (selectedSort.value === 'name') {
       movieList.value.sort((a, b) => a.title.localeCompare(b.title));
@@ -58,6 +60,7 @@
     Sort by
   </label>
 </div>
+<input v-model="searchQuery" placeholder="Search movies..." class="border border-gray-300 p-2 " />
 
     </div>
       <div class="max-w-sm mx-auto" v-if="isLoading" >

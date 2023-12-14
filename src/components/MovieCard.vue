@@ -19,7 +19,7 @@ import MovieDetails from '../views/MovieDetails.vue';
         <div class="flex justify-between items-start">
 
           <RouterLink :to="{ name: 'MovieDetails', params: { id: String(movie.id) } }">
-    <h2 class="font-bold">{{ movie.title }}</h2>
+    <h2 class="font-bold movie-card-title" ><span class="tooltip-text" id="top">I'm a tooltip!</span>{{ movie.title }}</h2>
   </RouterLink>
         
         
@@ -27,8 +27,12 @@ import MovieDetails from '../views/MovieDetails.vue';
         <div>
           <div class="text-sm text-gray-400 genre"> {{ movie.type}}</div>
           <div class="text-lg text-gray-800">{{ movie.release_date }}</div> <br>
-          <div class="bg-yellow-400 font-bold rounded-xl p-2 w-12 text-center ">{{movie.vote_average}}</div>
+          <div class="bg-white-400 border-2 border-black-900 font-bold  p-2 w-12 text-center ">{{movie.vote_average}}</div>
           <div class="text-sm text-gray-400 genre mt-3 overview"> {{ movie.overview}}</div>
+          <RouterLink :to="{ name: 'MovieDetails', params: { id: String(movie.id) } }">
+    <h2 class="font-bold movie-card-title" ><button class="secondaryButton mt-5">More</button></h2>
+  </RouterLink>
+          
         </div>
         
       </div>
@@ -56,8 +60,33 @@ import MovieDetails from '../views/MovieDetails.vue';
 
   .overview {
   display: -webkit-box;
-  -webkit-line-clamp: 7; /* Number of lines to show */
+  -webkit-line-clamp: 5; /* Number of lines to show */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.movie-card-title {
+    position: relative;
+    display: inline-block; /* Ensure proper behavior of hover action */
+  }
+
+  .tooltip-text {
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    top: 40px; /* Adjust based on your design */
+    left: 50%; /* Adjust based on your design */
+    width: 100px;
+    color: white;
+    font-size: 12px;
+    background-color: #192733;
+    border-radius: 10px;
+    padding: 10px 15px;
+    transition: visibility 0.2s ease-in-out; /* Add a transition for smooth visibility */
+  }
+
+  /* Ensure the hover effect targets the tooltip text */
+  .movie-card-title:hover .tooltip-text {
+    visibility: visible;
+  }
 </style>

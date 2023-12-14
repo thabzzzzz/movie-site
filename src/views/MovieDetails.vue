@@ -14,17 +14,20 @@
         
         <div class="ml-10 movie-details">
             <div class="deets">
-                {{ queryMovie.runtime }}
+                <i class="bi bi-star"></i> : {{ queryMovie.runtime }}
             </div>
             <br>
             <div class="deets">
-                {{ queryMovie.release_date }}
+                <i class="bi bi-calendar"></i> : {{ queryMovie.release_date }}
             </div>
             <div class="deets">
                 {{ queryMovie.genre }}
             </div>
             <div class="deets">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="$router.back()">
+                <i class="bi bi-book"></i> : <br>{{ queryMovie.overview }}
+            </div>
+            <div class="deets">
+                <button class="secondaryButton mt-5" @click="$router.back()">
                 Back
                 </button>
             </div>
@@ -33,11 +36,13 @@
     </div>
 </div>
     </section>
+    <Footer />
 </template>
 
 <script setup>
     import { ref,onMounted } from 'vue'
     import {useRouter} from 'vue-router'
+    import Footer from '../components/Footer.vue';
 
     const props = defineProps({
         id:{

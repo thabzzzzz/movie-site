@@ -1,5 +1,5 @@
 <script setup>
-    import { ref, onMounted } from 'vue'
+    import { ref, onMounted,computed } from 'vue'
     import MovieCard from '../components/MovieCard.vue';
     import autoAnimate from "@formkit/auto-animate"
     import Footer from '../components/Footer.vue'; 
@@ -8,6 +8,8 @@
     const isLoading = ref(true);
     const selectedSort = ref('');
     let container= ref();
+    const searchQuery = ref('');
+
 
     onMounted(async () => {
     const apiKey = '672d8a2f825f32332973ed7e2de2efa1'; // Replace with your actual TMDb API key
@@ -24,7 +26,13 @@
     }
   });
 
-  
+  const filteredMovies = computed(() => {
+  const query = searchQuery.value.toLowerCase();
+  return movieList.value.filter(movie => {
+    // Filter based on title or any other property you want
+    return movie.title.toLowerCase().includes(query);
+  });
+});
 
     const sortMovies = () => {
     if (selectedSort.value === 'name') {
@@ -60,16 +68,16 @@
     Sort by
   </label>
 </div>
-<input v-model="searchQuery" placeholder="Search movies..." class="border border-gray-300 p-2 " />
+<input v-model="searchQuery" placeholder="Search movies..." class="border border-gray-300 p-2 h-11" />
 
     </div>
       <div class="max-w-sm mx-auto" v-if="isLoading" >
         <span class="text-2xl font-bold text-black-700"  >Now loading...</span>
       </div>
-      <div class="grid grid-cols-3   "  v-else ref="container" data-aos="fade-up" >
-        <MovieCard v-for="movie in movieList" :key="movie.id" :movie="movie"  />
-
-      </div>
+      
+      <div class="grid grid-cols-3" ref="container">
+      <MovieCard v-for="movie in filteredMovies" :key="movie.id" :movie="movie" />
+    </div>
     </div>
     <Footer />
 </template>

@@ -11,9 +11,9 @@ import MovieDetails from '../views/MovieDetails.vue';
 <div class="  py-6 flex flex-col justify-center sm:py-12 m-5">
   
   <div class="py-3 sm:max-w-xl sm:mx-auto">
-    <div class="bg-white shadow-lg border-gray-100 	 border sm:rounded-3xl p-8 flex space-x-8 movie-card">
+    <div class="bg-white shadow-lg border-gray-200 	   p-8 flex space-x-8 movie-card hover:border-gray-700 border-transparent border-2">
       <div class="h-60 overflow-visible w-1/2">
-          <img class="rounded-3xl shadow-lg card-img " :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" :alt="movie.title">
+          <img class=" shadow-lg card-img " :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" :alt="movie.title">
       </div>
       <div class="flex flex-col w-1/2 space-y-4">
         <div class="flex justify-between items-start">

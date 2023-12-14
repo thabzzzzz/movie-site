@@ -1,7 +1,7 @@
 <template>
   
 
-<nav class="bg-white ">
+<nav class="bg-white mb-10">
   <div class="max-w-100 flex flex-wrap items-center justify-between mx-auto p-4">
     <router-link to="/" class="flex items-center space-x-3 rtl:space-x-reverse">
         
@@ -44,7 +44,7 @@
  .a:after {
   display:block;
   content: '';
-  border-bottom: solid 3px black;  
+  border-bottom: solid 3px var(--orange);  
   transform: scaleX(0);  
   transition: transform 250ms ease-in-out;
 }

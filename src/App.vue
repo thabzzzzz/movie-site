@@ -3,6 +3,8 @@
 </script>
 
 <template>
+
+
  <div class="max-w-100 mx-auto">
     <Navbar/>
   <RouterView/>

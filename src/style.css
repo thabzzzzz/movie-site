@@ -4,7 +4,12 @@
 
 @font-face {
     font-family: satoshi;
-    src: url(./assets/fonts/satoshi.ttf);
+    src: url(./assets/fonts/kanit.ttf);
+}
+
+@font-face {
+  font-family: monsterrat;
+  src: url(./assets/fonts/monsterrat.ttf);
 }
 
 :root {
@@ -42,3 +47,4 @@
     text-overflow: ellipsis;
     max-width: 200px;
   }
+

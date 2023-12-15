@@ -14,17 +14,17 @@
         
         <div class="ml-10 movie-details">
             <div class="deets">
-                <i class="bi bi-clock mr-2"></i>  {{ queryMovie.runtime }}
+                <i class="bi bi-hourglass mr-2"></i>  <span class="inline-block"><p>{{ queryMovie.runtime }} mins</p></span>
             </div>
             <br>
             <div class="deets">
-                <i class="bi bi-calendar mr-2"></i>  {{ queryMovie.release_date }}
+                <i class="bi bi-calendar mr-2"></i>  <span class="inline-block"><p >{{ queryMovie.release_date }}</p></span>
             </div>
             <div class="deets">
                 {{ queryMovie.genre }}
             </div>
             <div class="deets">
-                <i class="bi bi-book"></i>  <br><br>{{ queryMovie.overview }}
+                <i class="bi bi-book"></i>  <br><br><p>{{ queryMovie.overview }}</p>
             </div>
             <div class="deets">
                 <button class="secondaryButton mt-5" @click="$router.back()">
@@ -83,12 +83,17 @@
         margin-bottom: 40px;
     }
     @font-face {
-    font-family: oxygen;
-    src: url(../assets/fonts/oxygen.ttf);
+    font-family: kanit;
+    src: url(../assets/fonts/kanit.ttf);
+}
+
+@font-face {
+    font-family: monsterrat;
+    src: url(../assets/fonts/monsterrat.ttf);
 }
     .heading{
         font-size: 60px;
-        font-family: oxygen;
+        font-family: kanit;
         text-align: center;
     }
 
@@ -112,5 +117,7 @@
     /* Adjust styling for individual items */
     margin-bottom: 20px; /* Space between items */
   }
-    
+    p{
+        font-family: monsterrat;
+    }
 </style>

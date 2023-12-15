@@ -26,9 +26,9 @@ import MovieDetails from '../views/MovieDetails.vue';
         </div>
         <div>
           <div class="text-sm text-gray-400 genre"> {{ movie.type}}</div>
-          <div class="text-lg text-gray-800">{{ movie.release_date }}</div> <br>
+          <div class="text-lg text-gray-800"><p>{{ movie.release_date }}</p></div> <br>
           <div class="bg-white-400 border-2 border-black-900 font-bold  p-2 w-12 text-center ">{{movie.vote_average}}</div>
-          <div class="text-sm text-gray-400 genre mt-3 overview"> {{ movie.overview}}</div>
+          <div class="text-sm text-gray-600 genre mt-3 overview"><p>{{ movie.overview}}</p> </div>
           <RouterLink :to="{ name: 'MovieDetails', params: { id: String(movie.id) } }">
     <h2 class="font-bold movie-card-title" ><button class="secondaryButton mt-5">More</button></h2>
   </RouterLink>
@@ -89,4 +89,28 @@ import MovieDetails from '../views/MovieDetails.vue';
   .movie-card-title:hover .tooltip-text {
     visibility: visible;
   }
+
+  @font-face {
+    font-family: kanit;
+    src: url(../assets/fonts/kanit.ttf);
+}
+
+@font-face {
+    font-family: monsterrat;
+    src: url(../assets/fonts/monsterrat.ttf);
+}
+
+@font-face {
+    font-family: monsterrat2;
+    src: url(../assets/fonts/monsterrat2.ttf);
+}
+
+
+p{
+  font-family: monsterrat;
+}
+
+h2{
+  font-family: monsterrat2;
+}
 </style>

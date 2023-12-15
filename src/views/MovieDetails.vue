@@ -14,17 +14,17 @@
         
         <div class="ml-10 movie-details">
             <div class="deets">
-                <i class="bi bi-star"></i> : {{ queryMovie.runtime }}
+                <i class="bi bi-clock mr-2"></i>  {{ queryMovie.runtime }}
             </div>
             <br>
             <div class="deets">
-                <i class="bi bi-calendar"></i> : {{ queryMovie.release_date }}
+                <i class="bi bi-calendar mr-2"></i>  {{ queryMovie.release_date }}
             </div>
             <div class="deets">
                 {{ queryMovie.genre }}
             </div>
             <div class="deets">
-                <i class="bi bi-book"></i> : <br>{{ queryMovie.overview }}
+                <i class="bi bi-book"></i>  <br><br>{{ queryMovie.overview }}
             </div>
             <div class="deets">
                 <button class="secondaryButton mt-5" @click="$router.back()">

@@ -68,14 +68,14 @@
     Sort by
   </label>
 </div>
-<input v-model="searchQuery" placeholder="Search movies..." class="border border-gray-300 p-2 h-11" />
+<input v-model="searchQuery" placeholder="Search movies..." class="border border-gray-300 p-2 h-11 " id="search-box"/>
 
     </div>
       <div class="max-w-sm mx-auto" v-if="isLoading" >
         <span class="text-2xl font-bold text-black-700"  >Now loading...</span>
       </div>
       
-      <div class="grid grid-cols-3" ref="container">
+      <div class="grid grid-cols-3" ref="container" data-aos="fade-up" data-aos-duration="900">
       <MovieCard v-for="movie in filteredMovies" :key="movie.id" :movie="movie" />
     </div>
     </div>
@@ -115,5 +115,10 @@ h2 span {
 }
 select {
     line-height: 1.5; /* Adjust this value to increase/decrease line height */
+  }
+
+  #search-box{
+    top: 1.5px;
+    position: relative;
   }
 </style>

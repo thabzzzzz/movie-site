@@ -18,9 +18,7 @@
         <li class="a">
           <router-link to="/" class="block py-2 px-3   rounded md:bg-transparent md:p-0 nav " aria-current="page">Home</router-link> 
         </li>
-        <li class="a">
-          <router-link to="/about" class="block py-2 px-3  md:p-0  " aria-current="page">About</router-link> 
-        </li>
+       
         <li class="a">
           <router-link to="/movies" class="block py-2 px-3    md:p-0  " aria-current="page">Movies</router-link> 
         </li>

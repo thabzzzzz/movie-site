@@ -54,9 +54,7 @@ import MovieDetails from '../views/MovieDetails.vue';
     height: 400px;
   }
 
-  .genre{
-    text-transform: capitalize;
-  }
+ 
 
   .overview {
   display: -webkit-box;

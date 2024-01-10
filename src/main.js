@@ -11,5 +11,4 @@ import 'aos/dist/aos.css';
 
 
 
-createApp(App).use(router).mount('#app')
-;
+createApp(App).use(router).mount('#app');

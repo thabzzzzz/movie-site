@@ -75,7 +75,7 @@
         <span class="text-2xl font-bold text-black-700"  >Now loading...</span>
       </div>
       
-      <div class="grid grid-cols-3" ref="container" data-aos="fade-up" data-aos-duration="900">
+      <div class="grid grid-cols-3" ref="container" >
       <MovieCard v-for="movie in filteredMovies" :key="movie.id" :movie="movie" />
     </div>
     </div>

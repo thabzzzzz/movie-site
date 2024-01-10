@@ -12,6 +12,4 @@ import 'aos/dist/aos.css';
 
 
 createApp(App).use(router).mount('#app')
-app.use(AOS.init({
-    // Global settings or options for AOS
-  }));
+;

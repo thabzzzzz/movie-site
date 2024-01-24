@@ -3,6 +3,9 @@
     import MovieCard from '../components/MovieCard.vue';
     import autoAnimate from "@formkit/auto-animate"
     import Footer from '../components/Footer.vue'; 
+    import { useCartStore } from '../store/cartStore'
+    
+
 
     const movieList = ref([]);
     const isLoading = ref(true);
@@ -43,7 +46,18 @@
   
     autoAnimate(container.value);
   };
-  
+
+
+  const cartStore = useCartStore();
+
+  const handleAddToCart = (movie) => {
+  cartStore.addToCart(movie);
+};
+
+
+const cartItemCount = computed(() => cartStore.cart.length);
+
+
 </script>
 
 <template>
@@ -69,14 +83,14 @@
   </label>
 </div>
 <input v-model="searchQuery" placeholder="Search movies..." class="border border-gray-300 p-2 h-11 " id="search-box"/>
-
+<div class="ml-4 text-gray-600">Items in Cart: {{ cartItemCount }}</div>
     </div>
       <div class="max-w-sm mx-auto" v-if="isLoading" >
         <span class="text-2xl font-bold text-black-700"  >Now loading...</span>
       </div>
       
       <div class="grid grid-cols-3" ref="container" >
-      <MovieCard v-for="movie in filteredMovies" :key="movie.id" :movie="movie" />
+      <MovieCard v-for="movie in filteredMovies" :key="movie.id" :movie="movie"  @addToCart="handleAddToCart"/>
     </div>
     </div>
     <Footer />

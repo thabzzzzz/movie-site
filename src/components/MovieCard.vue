@@ -1,9 +1,13 @@
 <script setup>
-import MovieDetails from '../views/MovieDetails.vue';
+import { ref, defineProps, defineEmits } from 'vue';
 
-  defineProps({
-    movie:Object
-  })
+const { movie } = defineProps(['movie']);
+const emits = defineEmits(['addToCart']);
+
+const addToCart = () => {
+  console.log('Adding to cart:', movie);
+  emits('addToCart', movie);
+};
 </script>
 
 <template>
@@ -32,6 +36,7 @@ import MovieDetails from '../views/MovieDetails.vue';
           <RouterLink :to="{ name: 'MovieDetails', params: { id: String(movie.id) } }">
     <h2 class="font-bold movie-card-title" ><button class="secondaryButton mt-5">More</button></h2>
   </RouterLink>
+  <button @click="addToCart">Add to Cart</button>
           
         </div>
         

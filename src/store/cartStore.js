@@ -6,7 +6,11 @@ export const useCartStore = defineStore('cart', {
   }),
   actions: {
     addToCart(product) {
-      this.cart.push(product);
+        console.log(product.title)
+      this.cart.push({
+        movie: product.movie,
+        quantity: 1,
+      });
     },
   },
 });

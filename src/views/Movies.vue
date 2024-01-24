@@ -4,6 +4,9 @@
     import autoAnimate from "@formkit/auto-animate"
     import Footer from '../components/Footer.vue'; 
     import { useCartStore } from '../store/cartStore'
+   
+
+
     
 
 
@@ -55,7 +58,11 @@
 };
 
 
-const cartItemCount = computed(() => cartStore.cart.length);
+const cartItemCount = computed(() => {
+  const count = cartStore.cart.length;
+  console.log('Cart item count:', count);
+  return count;
+});
 
 
 </script>
@@ -83,7 +90,9 @@ const cartItemCount = computed(() => cartStore.cart.length);
   </label>
 </div>
 <input v-model="searchQuery" placeholder="Search movies..." class="border border-gray-300 p-2 h-11 " id="search-box"/>
-<div class="ml-4 text-gray-600">Items in Cart: {{ cartItemCount }}</div>
+<router-link to="/cart">
+  <div class="ml-4 text-gray-600">Items in Cart: {{ cartItemCount }}</div>
+</router-link>
     </div>
       <div class="max-w-sm mx-auto" v-if="isLoading" >
         <span class="text-2xl font-bold text-black-700"  >Now loading...</span>

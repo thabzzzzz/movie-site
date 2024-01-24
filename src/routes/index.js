@@ -34,6 +34,7 @@ const routes = [
     name:'NotFound',
     component:() => import('../views/NotFound.vue'),
     },
+    { path: '/cart', name: 'CartView',component:() => import('../views/CartView.vue') }, 
 ]
 
 

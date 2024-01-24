@@ -2,8 +2,8 @@
     <div>
       <h2>Your Cart</h2>
       <ul>
-        <li v-for="cartItem in cartItems" :key="cartItem.id">
-          <p v-if="cartItem">{{ cartItem.title }} </p>
+        <li v-for="cartItem in cartItems" :key="cartItem.product.id">
+          <p v-if="cartItem">{{ cartItem.product.title }} </p>
           <p v-else>Movie information not available</p>
         </li>
       </ul>

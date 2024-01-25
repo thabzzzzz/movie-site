@@ -33,10 +33,15 @@ const addToCart = () => {
           <div class="text-lg text-gray-800"><p>{{ movie.release_date }}</p></div> <br>
           <div class="bg-white-400 border-2 border-black-900 font-bold  p-2 w-12 text-center ">{{movie.vote_average}}</div>
           <div class="text-sm text-gray-600 genre mt-3 overview"><p>{{ movie.overview}}</p> </div>
-          <RouterLink :to="{ name: 'MovieDetails', params: { id: String(movie.id) } }">
-    <h2 class="font-bold movie-card-title" ><button class="secondaryButton mt-5">More</button></h2>
+          <div class="button-container">
+  <RouterLink :to="{ name: 'MovieDetails', params: { id: String(movie.id) } }">
+    <h2 class="font-bold movie-card-title">
+      <button class="secondaryButton mt-5">More</button>
+    </h2>
   </RouterLink>
-  <button @click="addToCart">Add to Cart</button>
+  <button class="addtocart" @click="addToCart">Add to Cart</button>
+</div>
+
           
         </div>
         
@@ -115,5 +120,32 @@ p{
 
 h2{
   font-family: monsterrat2;
+}
+
+.addtocart {
+    padding: 10px;
+    margin-left: 15px;
+    border: 2px black solid;
+    margin-top: 15px;
+    font-family: monsterrat2;
+    font-size: 14px;
+    transition: all 0.3s ease; /* Transition for both hover and normal state */
+}
+
+.addtocart:hover {
+    color: white;
+    background-color: #F05E24;
+    transition: all 0.3s ease; /* Transition for both hover and normal state */
+}
+
+.button-container {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+}
+
+
+
+.button-container button {
+  margin-right: 10px; /* Add some space between the buttons */
 }
 </style>

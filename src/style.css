@@ -44,6 +44,24 @@
     transition: all 0.3s ease; /* Transition for both hover and active state */
 }
 
+.cartlink {
+  padding-right: 19px;
+  padding-top: 13px;
+  padding-bottom: 9px;
+  margin-top: 2px;
+  border-color: #000000;
+  border-width: 2px;
+  font-family: monsterrat2;
+  margin-left: 1200px;
+  transition: all 0.3s ease; /* Transition for both hover and normal state */
+}
+
+.cartlink:hover {
+  color: white;
+  background-color: #F05E24;
+  transition: all 0.3s ease; /* Transition for hover state */
+}
+
   .movie-card-title{
     white-space: nowrap;
     overflow: hidden;

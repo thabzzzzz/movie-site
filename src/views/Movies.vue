@@ -5,7 +5,9 @@
     import Footer from '../components/Footer.vue'; 
     import { useCartStore } from '../store/cartStore'
    
+    import { inject } from 'vue';
 
+const $toast = inject('$toast');
 
     
 
@@ -55,12 +57,18 @@
 
   const handleAddToCart = (movie) => {
   cartStore.addToCart(movie);
+  $toast.open({
+    message: `Added to cart`,
+    type: 'success',
+    
+  });
 };
 
 
 const cartItemCount = computed(() => {
   const count = cartStore.cart.length;
-  console.log('Cart item count:', count);
+ 
+  
   return count;
 });
 
@@ -90,8 +98,10 @@ const cartItemCount = computed(() => {
   </label>
 </div>
 <input v-model="searchQuery" placeholder="Search movies..." class="border border-gray-300 p-2 h-11 " id="search-box"/>
-<router-link to="/cart">
-  <div class="ml-4 text-gray-600">Items in Cart: {{ cartItemCount }}</div>
+
+
+<router-link to="/cart" class="border border-solid border-gray-300 cartlink">
+  <div class="ml-4 ">Items in Cart: {{ cartItemCount }}</div>
 </router-link>
     </div>
       <div class="max-w-sm mx-auto" v-if="isLoading" >
@@ -144,4 +154,17 @@ select {
     top: 1.5px;
     position: relative;
   }
+
+  .cartlink{
+    padding-right: 19px;
+    padding-top: 13px;
+    padding-bottom: 9px;
+    margin-top: 2px;
+    border-color: #000000;
+    border-width: 2px;
+  font-family: monsterrat2;
+  margin-left: 1200px;
+  }
+  
+  
 </style>

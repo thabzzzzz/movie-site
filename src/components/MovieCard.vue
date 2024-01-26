@@ -39,7 +39,7 @@ const addToCart = () => {
       <button class="secondaryButton mt-5">More</button>
     </h2>
   </RouterLink>
-  <button class="addtocart" @click="addToCart">Add to Cart</button>
+  <button class="addtocart" @click="addToCart">Add</button>
 </div>
 
           

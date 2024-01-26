@@ -101,7 +101,7 @@ const cartItemCount = computed(() => {
 
 
 <router-link to="/cart" class="border border-solid border-gray-300 cartlink">
-  <div class="ml-4 ">Items in Cart: {{ cartItemCount }}</div>
+  <div class="ml-4 ">Watchlist: {{ cartItemCount }}</div>
 </router-link>
     </div>
       <div class="max-w-sm mx-auto" v-if="isLoading" >

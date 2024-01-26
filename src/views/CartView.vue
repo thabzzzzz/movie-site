@@ -42,8 +42,10 @@
 <td class="text-center">{{ (cartItemRuntime[cartItem.product.id] || 0) * cartItem.quantity }}</td>
  
 </tr>
-<tr>
-    <td colspan="3" class="text-right font-bold">Total Runtime:</td>
+<br>
+<br>
+<tr class="total-runtime-row">
+    <td colspan="3" class="text-right font-bold">Backlog Watchtime:</td>
     <td class="text-center font-bold">{{ totalRuntime }}</td>
   </tr>
         </tbody>
@@ -63,7 +65,7 @@ const cartItems = ref(cartStore.cart);
 const cartItemRuntime = ref({});
 
 onMounted(async () => {
-  // Fetch movie runtimes when component is mounted
+ 
   await fetchMovieRuntimes();
 });
 
@@ -80,19 +82,19 @@ async function fetchMovieRuntime(movieId) {
     const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=672d8a2f825f32332973ed7e2de2efa1`);
     const data = await response.json();
 
-    // Log the data received from the API
+    
     console.log(data);
 
-    // Update the reactive variable with movie details
+    
     const index = cartItems.value.findIndex(item => item.product.id === movieId);
     if (index !== -1) {
       const productDetails = cartItems.value[index].product;
       productDetails.runtime = data.runtime || 'N/A';
-      productDetails.genres = data.genres || [];  // Assuming genres is an array of genre objects
-      productDetails.image = `https://image.tmdb.org/t/p/w500/${data.poster_path}` || '';  // Adjust the path accordingly
+      productDetails.genres = data.genres || [];  
+      productDetails.image = `https://image.tmdb.org/t/p/w500/${data.poster_path}` || '';  
     }
 
-    // Update the reactive variable with movie runtime
+    
     cartItemRuntime.value[movieId] = data.runtime || 'N/A';
   } catch (error) {
     console.error(`Error fetching movie details for movie ID ${movieId}:`, error);
@@ -188,6 +190,15 @@ h3 {
 
 .cart-table .text-center {
   text-align: center;
+}
+
+.cart-table tbody tr {
+  transition: background-color 0.07s ease-in-out;
+}
+
+/* Exclude hover effect for total runtime row */
+.cart-table tbody tr.total-runtime-row:hover {
+  background-color: initial;
 }
 
 .cart-table tbody tr:hover {

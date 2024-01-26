@@ -33,4 +33,8 @@
    
         border-color: #F05E24;;
     }
+
+    p{
+        font-family: monsterrat;
+    }
 </style>

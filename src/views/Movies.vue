@@ -58,7 +58,7 @@ const $toast = inject('$toast');
   const handleAddToCart = (movie) => {
   cartStore.addToCart(movie);
   $toast.open({
-    message: `Added to cart`,
+    message: `Added to backlog`,
     type: 'success',
     
   });

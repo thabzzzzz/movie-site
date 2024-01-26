@@ -1,24 +1,20 @@
 <template>
-  <div>
+ <div>
     <h2 class="line-divider font-2xl">
       <span class="">Backlog</span>
     </h2>
     <div class="cartmain mx-20">
-    
-
-    <h3>
-      {{ cartItemCount }} {{ itemLabel }}
-    </h3>
-
+      <h3>
+        {{ cartItemCount }} {{ itemLabel }}
+      </h3>
       <hr>
-
       <table class="cart-table">
         <thead>
           <tr>
             <th>Product Details</th>
             <th class="text-center">Quantity</th>
-            <th class="text-center">Price</th>
             <th class="text-center">Total</th>
+            <th class="text-center">Runtime</th>
           </tr>
         </thead>
         <tbody>
@@ -37,31 +33,55 @@
               </div>
             </td>
             <td class="text-center">{{ cartItem.quantity }}</td>
-            <td class="text-center">{{ cartItem.product.price }}</td>
             <td class="text-center">{{ cartItem.quantity * cartItem.product.price }}</td>
+            <td class="text-center">{{ cartItemRuntime[cartItem.product.id] || 'N/A' }}</td>
           </tr>
         </tbody>
       </table>
-  </div>
+    </div>
   </div>
 </template>
 
+
+
 <script setup>
 import { useCartStore } from '../store/cartStore';
-import { ref, onMounted, computed } from 'vue';
-import Footer from '../components/Footer.vue';
+import { ref, onMounted } from 'vue';
 
 const cartStore = useCartStore();
-const cartItems = cartStore.cart;
+const cartItems = ref(cartStore.cart);
+const cartItemRuntime = ref({});
 
-const cartItemCount = computed(() => {
-  return cartStore.cart.length;
+onMounted(async () => {
+  // Fetch movie runtimes when component is mounted
+  await fetchMovieRuntimes();
 });
 
-const itemLabel = computed(() => {
-  return cartItemCount.value === 1 ? 'Item' : 'Items';
-});
+async function fetchMovieRuntimes() {
+  if (Array.isArray(cartItems.value)) {
+    for (const cartItem of cartItems.value) {
+      await fetchMovieRuntime(cartItem.product.id);
+    }
+  }
+}
+
+async function fetchMovieRuntime(movieId) {
+  try {
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=672d8a2f825f32332973ed7e2de2efa1`);
+    const data = await response.json();
+
+    // Log the data received from the API
+    console.log(data);
+
+    // Update the reactive variable with movie runtime
+    cartItemRuntime.value[movieId] = data.runtime || 'N/A';
+  } catch (error) {
+    console.error(`Error fetching movie runtime for movie ID ${movieId}:`, error);
+  }
+}
 </script>
+
+
 
 <style scoped>
 .line-divider {
@@ -86,18 +106,18 @@ h2 span {
 }
 
 hr {
-      border: none;
-      height: 2px;
-      background-color: #858585; /* Change color as needed */
-      margin: 0; /* Remove default margin */
-    }
+  border: none;
+  height: 2px;
+  background-color: #858585; /* Change color as needed */
+  margin: 0; /* Remove default margin */
+}
 
-    h3{
-      font-family: monsterrat2;
-      font-size: 20px;
-    }
+h3 {
+  font-family: monsterrat2;
+  font-size: 20px;
+}
 
-    .cart-table {
+.cart-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
@@ -128,5 +148,4 @@ hr {
 .cart-table tbody tr:hover {
   background-color: #f5f5f5;
 }
-    
 </style>

@@ -1,6 +1,6 @@
 <script setup>
     import { ref, onMounted,computed } from 'vue'
-    import MovieCard from '../components/MovieCard.vue';
+   import MovieCard from '../components/MovieCard.vue';
     import autoAnimate from "@formkit/auto-animate"
     import Footer from '../components/Footer.vue'; 
     import { useCartStore } from '../store/cartStore'

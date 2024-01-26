@@ -1,6 +1,6 @@
 <template>
  <div>
-    <h2 class="line-divider font-2xl">
+    <h2 class="line-divider font-2xl ">
       <span class="">Backlog</span>
     </h2>
     <div class="cartmain mx-20">
@@ -13,8 +13,9 @@
           <tr>
             <th>Product Details</th>
             <th class="text-center">Quantity</th>
+            <th class="text-center">Runtime (minutes)</th>
             <th class="text-center">Total</th>
-            <th class="text-center">Runtime</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -27,16 +28,24 @@
       <div class="flex flex-col justify-between ml-4 flex-grow">
         <span class="font-bold text-sm">{{ cartItem.product.title }}</span>
         <span class="text-red-500 text-xs">{{ cartItem.product.brand }}</span>
-        <br>
-        <p>{{ getGenres(cartItem.product.genres) || 'N/A' }}</p>
-        <a href="#" class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
+    
+        <i>{{ getGenres(cartItem.product.genres) || 'N/A' }}</i>
+       <!-- ... existing code -->
+
+<a href="#" class="font-semibold hover:text-red-500 text-gray-500 text-xs" @click.prevent="removeFromCart(cartItem.product.id)">Remove</a>
+
       </div>
     </div>
   </td>
   <td class="text-center">{{ cartItem.quantity }}</td>
-  <td class="text-center">{{ cartItem.quantity * cartItem.product.price }}</td>
-  <td class="text-center">{{ cartItemRuntime[cartItem.product.id] || 'N/A' }}</td>
+<td class="text-center">{{ cartItemRuntime[cartItem.product.id] || 'N/A' }}</td>
+<td class="text-center">{{ (cartItemRuntime[cartItem.product.id] || 0) * cartItem.quantity }}</td>
+ 
 </tr>
+<tr>
+    <td colspan="3" class="text-right font-bold">Total Runtime:</td>
+    <td class="text-center font-bold">{{ totalRuntime }}</td>
+  </tr>
         </tbody>
       </table>
     </div>
@@ -47,7 +56,7 @@
 
 <script setup>
 import { useCartStore } from '../store/cartStore';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 const cartStore = useCartStore();
 const cartItems = ref(cartStore.cart);
@@ -90,21 +99,38 @@ async function fetchMovieRuntime(movieId) {
   }
 }
 
-
-
 const getGenres = (genres) => {
   if (genres && genres.length > 0) {
     return genres.map(genre => genre.name).join(', ');
   }
   return 'N/A';
 };
+
+const removeFromCart = (movieId) => {
+  const index = cartItems.value.findIndex(item => item.product.id === movieId);
+  if (index !== -1) {
+    cartItems.value.splice(index, 1);
+    // Optionally, you can update your backend or local storage here to persist the changes.
+  }
+}
+
+//runtime total
+const totalRuntime = computed(() => {
+  let sum = 0;
+  for (const cartItem of cartItems.value) {
+    const runtime = cartItemRuntime.value[cartItem.product.id] || 0;
+    sum += runtime * cartItem.quantity;
+  }
+  return sum;
+});
 </script>
+
 
 
 
 <style scoped>
 .line-divider {
-  margin-bottom: 40px;
+  margin-bottom: 100px;
 }
 
 h2 {

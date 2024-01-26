@@ -19,23 +19,24 @@
         </thead>
         <tbody>
           <tr v-for="cartItem in cartItems" :key="cartItem.product.id">
-            <td class="product-details" v-if="cartItem">
-              <div class="flex items-center">
-                <div class="w-20">
-                  <img class="h-24" :src="cartItem.product.image" :alt="cartItem.product.title">
-                </div>
-                <div class="flex flex-col justify-between ml-4 flex-grow">
-                  <span class="font-bold text-sm">{{ cartItem.product.title }}</span>
-                  <span class="text-red-500 text-xs">{{ cartItem.product.brand }}</span>
-                  <br>
-                  <a href="#" class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
-                </div>
-              </div>
-            </td>
-            <td class="text-center">{{ cartItem.quantity }}</td>
-            <td class="text-center">{{ cartItem.quantity * cartItem.product.price }}</td>
-            <td class="text-center">{{ cartItemRuntime[cartItem.product.id] || 'N/A' }}</td>
-          </tr>
+  <td class="product-details" v-if="cartItem">
+    <div class="flex items-center">
+      <div class="w-20">
+        <img class="h-24" :src="cartItem.product.image" :alt="cartItem.product.title">
+      </div>
+      <div class="flex flex-col justify-between ml-4 flex-grow">
+        <span class="font-bold text-sm">{{ cartItem.product.title }}</span>
+        <span class="text-red-500 text-xs">{{ cartItem.product.brand }}</span>
+        <br>
+        <p>{{ getGenres(cartItem.product.genres) || 'N/A' }}</p>
+        <a href="#" class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
+      </div>
+    </div>
+  </td>
+  <td class="text-center">{{ cartItem.quantity }}</td>
+  <td class="text-center">{{ cartItem.quantity * cartItem.product.price }}</td>
+  <td class="text-center">{{ cartItemRuntime[cartItem.product.id] || 'N/A' }}</td>
+</tr>
         </tbody>
       </table>
     </div>
@@ -73,12 +74,30 @@ async function fetchMovieRuntime(movieId) {
     // Log the data received from the API
     console.log(data);
 
+    // Update the reactive variable with movie details
+    const index = cartItems.value.findIndex(item => item.product.id === movieId);
+    if (index !== -1) {
+      const productDetails = cartItems.value[index].product;
+      productDetails.runtime = data.runtime || 'N/A';
+      productDetails.genres = data.genres || [];  // Assuming genres is an array of genre objects
+      productDetails.image = `https://image.tmdb.org/t/p/w500/${data.poster_path}` || '';  // Adjust the path accordingly
+    }
+
     // Update the reactive variable with movie runtime
     cartItemRuntime.value[movieId] = data.runtime || 'N/A';
   } catch (error) {
-    console.error(`Error fetching movie runtime for movie ID ${movieId}:`, error);
+    console.error(`Error fetching movie details for movie ID ${movieId}:`, error);
   }
 }
+
+
+
+const getGenres = (genres) => {
+  if (genres && genres.length > 0) {
+    return genres.map(genre => genre.name).join(', ');
+  }
+  return 'N/A';
+};
 </script>
 
 

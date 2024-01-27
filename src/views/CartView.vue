@@ -39,7 +39,7 @@
   </td>
   <td class="text-center">
     <!-- Use a number input for the quantity -->
-    <input type="number" v-model="cartItem.quantity" @change="updateCartItemQuantity(cartItem)">
+    <input type="number" v-model="cartItem.quantity" @change="updateCartItemQuantity(cartItem)" class="input">
   </td>
 <td class="text-center">{{ cartItemRuntime[cartItem.product.id] || 'N/A' }}</td>
 <td class="text-center">{{ (cartItemRuntime[cartItem.product.id] || 0) * cartItem.quantity }}</td>
@@ -212,5 +212,10 @@ h3 {
 
 .cart-table tbody tr:hover {
   background-color: #f5f5f5;
+}
+
+.input{
+  width: 40px;
+
 }
 </style>

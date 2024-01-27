@@ -17,7 +17,7 @@ const addToCart = () => {
   <div class="py-3 sm:max-w-xl sm:mx-auto">
     <div class="bg-white shadow-lg border-gray-200 	   p-8 flex space-x-8 movie-card hover:border-gray-700 border-transparent border-2">
       <div class="h-60 overflow-visible w-1/2">
-          <img class=" shadow-lg card-img " :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" :alt="movie.title">
+        <RouterLink :to="{ name: 'MovieDetails', params: { id: String(movie.id) } }"> <img class=" shadow-lg card-img " :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" :alt="movie.title"></RouterLink>
       </div>
       <div class="flex flex-col w-1/2 space-y-4">
         <div class="flex justify-between items-start">

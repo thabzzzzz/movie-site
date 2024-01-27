@@ -3,6 +3,7 @@ export default {
   content: [
     './index.html',
     './src/**/*.vue',
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {
@@ -12,5 +13,7 @@ export default {
 
     }
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin'),
+  ],
 }}

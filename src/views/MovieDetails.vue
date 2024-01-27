@@ -47,7 +47,9 @@
               <br>
               <div class="deets">
                 <i class="bi bi-collection-play-fill"></i>
-                <span class="inline-block"><p class="font-bold ml-5">Play trailer</p></span>
+                <span class="inline-block">
+                    <p class="font-bold ml-5" @click="showTrailer">Play trailer</p>
+                </span>
               </div>
               <br>
               <div class="deets">

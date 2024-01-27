@@ -86,8 +86,10 @@ import { defineProps } from 'vue';
 import Footer from '../components/Footer.vue';
 import Modal from '../components/Modal.vue';
 import { useModalStore } from '../store/modalStore.js';
+import { useMovieStore } from '../store/movieStore.js'; // Import the movie store
 
 const modalStore = useModalStore();
+const movieStore = useMovieStore(); // Use the movie store
 
 // Use modalStore.show instead of ref(true)
 const show = computed(() => modalStore.show);
@@ -150,6 +152,7 @@ onMounted(async () => {
 
       // Calculate percentage based on a scale of 10
       userRatingPercentage.value = (userRating.value / 10) * 100;
+      movieStore.setQueryMovie(data);
     } else {
       router.push({ name: 'NotFound' });
     }

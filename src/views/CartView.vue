@@ -12,7 +12,7 @@
         <thead>
           <tr>
             <th>Product Details</th>
-            <th class="text-center">Quantity</th>
+            <th class="text-center">Viewings</th>
             <th class="text-center">Runtime (minutes)</th>
             <th class="text-center">Total</th>
             
@@ -37,7 +37,10 @@
       </div>
     </div>
   </td>
-  <td class="text-center">{{ cartItem.quantity }}</td>
+  <td class="text-center">
+    <!-- Use a number input for the quantity -->
+    <input type="number" v-model="cartItem.quantity" @change="updateCartItemQuantity(cartItem)">
+  </td>
 <td class="text-center">{{ cartItemRuntime[cartItem.product.id] || 'N/A' }}</td>
 <td class="text-center">{{ (cartItemRuntime[cartItem.product.id] || 0) * cartItem.quantity }}</td>
  
@@ -125,6 +128,12 @@ const totalRuntime = computed(() => {
   }
   return sum;
 });
+
+
+const updateCartItemQuantity = (cartItem) => {
+  // Update the quantity in the Pinia store
+  cartStore.updateCartItemQuantity(cartItem.product.id, cartItem.quantity);
+};
 </script>
 
 

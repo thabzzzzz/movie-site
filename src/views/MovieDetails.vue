@@ -30,15 +30,26 @@
                 <div class="flex justify-between mb-1">
                   <span class="font-medium"><p class="font-bold">User score: {{ userRating.toFixed(1) }} / 10</p></span>
                 </div>
-                <div class="w-56 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                  <div class="bg-blue-600 h-2.5 rounded-full" :style="{ width: userRatingPercentage + '%' }"></div>
+                <div class="w-56 bg-gray-200 rounded-full h-2.5 ">
+                  <div
+                    class="h-2.5 rounded-full"
+                    :style="{ width: userRatingPercentage + '%', background: progressBarColor }"
+                  ></div>
                 </div>
               </div>
               <div class="deets">
                 <span v-for="(genre, index) in queryMovie.genres" :key="index" class="badge text-s font-medium me-2 px-2.5 py-0.5 rounded-full">
                   {{ genre.name }}
                 </span>
+                <br>
+               
               </div>
+              <br>
+              <div class="deets">
+                <i class="bi bi-collection-play-fill"></i>
+                <span class="inline-block"><p class="font-bold ml-5">Play trailer</p></span>
+              </div>
+              <br>
               <div class="deets">
                 <button class="secondaryButton mt-5" @click="$router.back()">
                   Back
@@ -53,7 +64,7 @@
   </template>
   
   <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, computed } from 'vue';
   import { useRouter } from 'vue-router';
   import Footer from '../components/Footer.vue';
   
@@ -69,6 +80,25 @@
   const userRating = ref(0);
   const userRatingPercentage = ref(0);
   const router = useRouter();
+  
+  const userRatingColors = [
+  { percent: 0, color: '#FF0000' },
+  { percent: 25, color: '#FF6B5E' },
+  { percent: 50, color: '#FFC2A6' },
+  { percent: 75, color: '#C8FFB3' },
+  { percent: 90, color: '#95FF66' },
+  { percent: 100, color: '#00FF00' }
+];
+
+  
+  const progressBarColor = computed(() => {
+    for (let i = 0; i < userRatingColors.length - 1; i++) {
+      if (userRatingPercentage.value <= userRatingColors[i].percent) {
+        return userRatingColors[i].color;
+      }
+    }
+    return userRatingColors[userRatingColors.length - 1].color;
+  });
   
   onMounted(async () => {
     try {
@@ -154,8 +184,9 @@
   .badge {
     border: 2px #F05E24 solid;
   }
-  p{
-  font-family: monsterrat;
-}
+  
+  p {
+    font-family: monsterrat;
+  }
   </style>
   

@@ -48,7 +48,7 @@
               <div class="deets">
                 <i class="bi bi-collection-play-fill"></i>
                 <span class="inline-block">
-                 
+                  <button @click="openModal"><p class="font-bold ml-5">Open Modal</p></button>
                 </span>
               </div>
               <br>
@@ -62,7 +62,7 @@
           </div>
         </div>
       </div>
-      <button @click="openModal">Open Modal</button>
+      
 
       <teleport to="body">
       <Modal v-if="modalStore.show">

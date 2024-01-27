@@ -48,10 +48,11 @@
               <div class="deets">
                 <i class="bi bi-collection-play-fill"></i>
                 <span class="inline-block">
-                    <p class="font-bold ml-5" @click="showTrailer">Play trailer</p>
+                 
                 </span>
               </div>
               <br>
+          
               <div class="deets">
                 <button class="secondaryButton mt-5" @click="$router.back()">
                   Back
@@ -61,73 +62,107 @@
           </div>
         </div>
       </div>
+      <button @click="openModal">Open Modal</button>
+
+      <teleport to="body">
+      <Modal v-if="modalStore.show">
+        <p>This is the modal content.</p>
+      </Modal>
+    </teleport>
+<div>
+    
+
+    
+  </div>
     </section>
     <Footer />
+ 
   </template>
   
   <script setup>
-  import { ref, onMounted, computed } from 'vue';
-  import { useRouter } from 'vue-router';
-  import Footer from '../components/Footer.vue';
-  
-  const props = defineProps({
-    id: {
-      type: String,
-      required: true,
-    },
-  });
-  
-  const queryMovie = ref([]);
-  const isLoading = ref(true);
-  const userRating = ref(0);
-  const userRatingPercentage = ref(0);
-  const router = useRouter();
-  
-  const userRatingColors = [
+import { ref, onMounted, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { defineProps } from 'vue';
+import Footer from '../components/Footer.vue';
+import Modal from '../components/Modal.vue';
+import { useModalStore } from '../store/modalStore.js';
+
+const modalStore = useModalStore();
+
+// Use modalStore.show instead of ref(true)
+const show = computed(() => modalStore.show);
+
+const openModal = () => {
+  console.log('view true');
+  modalStore.openModal();
+};
+
+
+const props = defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
+});
+
+const queryMovie = ref([]);
+const isLoading = ref(true);
+const userRating = ref(0);
+const userRatingPercentage = ref(0);
+const router = useRouter();
+
+
+const userRatingColors = [
   { percent: 0, color: '#FF0000' },
   { percent: 25, color: '#FF6B5E' },
   { percent: 50, color: '#FFC2A6' },
   { percent: 75, color: '#C8FFB3' },
   { percent: 90, color: '#95FF66' },
-  { percent: 100, color: '#00FF00' }
+  { percent: 100, color: '#00FF00' },
 ];
 
-  
-  const progressBarColor = computed(() => {
-    for (let i = 0; i < userRatingColors.length - 1; i++) {
-      if (userRatingPercentage.value <= userRatingColors[i].percent) {
-        return userRatingColors[i].color;
-      }
+const progressBarColor = computed(() => {
+  for (let i = 0; i < userRatingColors.length - 1; i++) {
+    if (userRatingPercentage.value <= userRatingColors[i].percent) {
+      return userRatingColors[i].color;
     }
-    return userRatingColors[userRatingColors.length - 1].color;
-  });
-  
-  onMounted(async () => {
-    try {
-      const movieId = props.id;
-      const apiKey = '672d8a2f825f32332973ed7e2de2efa1';
-      const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`);
-      const data = await response.json();
-  
-      if (response.ok) {
-        queryMovie.value = data;
-  
-        // Assuming your API provides average rating out of 10
-        userRating.value = data.vote_average;
-  
-        // Calculate percentage based on a scale of 10
-        userRatingPercentage.value = (userRating.value / 10) * 100;
-      } else {
-        router.push({ name: 'NotFound' });
-      }
-  
-      isLoading.value = false;
-    } catch (error) {
-      console.error('Error fetching movie details:', error);
-      isLoading.value = false;
+  }
+  return userRatingColors[userRatingColors.length - 1].color;
+});
+
+const showTrailer = () => {
+  // Logic to show the trailer or open the modal
+  showModal.value = true;
+};
+
+onMounted(async () => {
+  try {
+    const movieId = props.id;
+    const apiKey = '672d8a2f825f32332973ed7e2de2efa1';
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`);
+    const data = await response.json();
+
+    if (response.ok) {
+      queryMovie.value = data;
+
+      // Assuming your API provides average rating out of 10
+      userRating.value = data.vote_average;
+
+      // Calculate percentage based on a scale of 10
+      userRatingPercentage.value = (userRating.value / 10) * 100;
+    } else {
+      router.push({ name: 'NotFound' });
     }
-  });
-  </script>
+
+    isLoading.value = false;
+  } catch (error) {
+    console.error('Error fetching movie details:', error);
+    isLoading.value = false;
+  }
+});
+
+</script>
+
   
   <style scoped>
   h1 {
@@ -190,5 +225,6 @@
   p {
     font-family: monsterrat;
   }
+ 
   </style>
   

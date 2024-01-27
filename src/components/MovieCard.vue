@@ -127,7 +127,8 @@ h2{
     margin-left: 15px;
     border: 2px black solid;
     margin-top: 15px;
-    font-family: monsterrat2;
+    font-family: oxygen;
+    font-weight: bold;
     font-size: 14px;
     transition: all 0.3s ease; /* Transition for both hover and normal state */
 }

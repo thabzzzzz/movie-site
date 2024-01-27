@@ -2,7 +2,7 @@
 <template>
   <div v-if="modalStore.show" class="modal">
     <div class="modal-content">
-      <button @click="closeModal" class="close-button">Close</button>
+      <button @click="closeModal" class="close-button"><p class="font-bold">Close</p></button>
       <iframe :src="trailerUrl" class="trailer-iframe" frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
@@ -69,7 +69,7 @@ onMounted(async () => {
 .modal-content {
   position: relative; /* Added for proper positioning */
   background: white;
-  padding: 20px;
+  padding: 40px;
   border-radius: 8px;
 }
 .close-button {

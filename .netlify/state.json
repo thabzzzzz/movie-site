@@ -1,0 +1,19 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Pretoria",
+			"country": {
+				"code": "ZA",
+				"name": "South Africa"
+			},
+			"subdivision": {
+				"code": "GP",
+				"name": "Gauteng"
+			},
+			"timezone": "Africa/Johannesburg",
+			"latitude": -25.7599,
+			"longitude": 28.2604
+		},
+		"timestamp": 1706415648661
+	}
+}

@@ -3,7 +3,11 @@
     <h2 class="line-divider font-2xl ">
       <span class="">Backlog</span>
     </h2>
+    
     <div class="cartmain mx-20">
+      <button class="secondaryButton mb-5" @click="$router.back()">
+                  Back
+                </button>
       <h3>
         {{ cartItemCount }} {{ itemLabel }}
       </h3>

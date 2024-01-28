@@ -9,8 +9,8 @@
       <!-- Simplified conditional rendering -->
       <div v-if="trailerKey">
         <iframe
-          width="560"
-          height="315"
+        width="1120"
+  height="630"
           :src="`https://www.youtube.com/embed/${trailerKey}`"
           frameborder="0"
           allowfullscreen

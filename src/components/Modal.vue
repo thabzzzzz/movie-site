@@ -47,9 +47,6 @@ onMounted(async () => {
     // Set up your GraphQL client with the appropriate endpoint
     const graphQLClient = new GraphQLClient('/.netlify/functions/youtube-trailer');
 
-    // Add your API key to the headers
-    graphQLClient.setHeader('Authorization', 'Bearer AIzaSyC7UEh4uRpo1slT7RB_BNlPMKAAsBQcuRQ');
-
     // Make the GraphQL query
     const response = await graphQLClient.request(gqlQuery);
 
@@ -63,8 +60,6 @@ onMounted(async () => {
   }
 });
 </script>
-
-
 
 <style scoped>
 .modal {
@@ -85,6 +80,7 @@ onMounted(async () => {
   padding: 40px;
   border-radius: 8px;
 }
+
 .close-button {
   position: absolute;
   top: 10px;

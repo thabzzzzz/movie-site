@@ -45,7 +45,7 @@ onMounted(async () => {
     `;
 
     // Set up your GraphQL client with the appropriate endpoint
-    const graphQLClient = new GraphQLClient('https://www.googleapis.com/youtube/v3');
+    const graphQLClient = new GraphQLClient('/.netlify/functions/youtube-trailer');
 
     // Add your API key to the headers
     graphQLClient.setHeader('Authorization', 'Bearer AIzaSyC7UEh4uRpo1slT7RB_BNlPMKAAsBQcuRQ');
@@ -63,6 +63,7 @@ onMounted(async () => {
   }
 });
 </script>
+
 
 
 <style scoped>

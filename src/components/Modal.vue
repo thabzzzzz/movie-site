@@ -10,8 +10,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import { useModalStore } from '../store/modalStore'; // Adjust the path as needed
+import { GraphQLClient } from 'graphql-request';
+import { useModalStore } from '../store/modalStore';
 import { useMovieStore } from '../store/movieStore';
 
 const modalStore = useModalStore();
@@ -27,23 +27,34 @@ const trailerUrl = ref('');
 
 onMounted(async () => {
   try {
-    // Extract relevant data from the movie API response
     const { title, release_date } = queryMovie;
-
-    // Extract the release year from the release date
     const releaseYear = release_date ? new Date(release_date).getFullYear() : '';
 
-    // Construct a search query for YouTube using the title and release year
+    // Construct a GraphQL query for searching YouTube
     const searchQuery = encodeURIComponent(`${title} official trailer ${releaseYear}`);
+    const gqlQuery = `
+      query {
+        search(query: "${searchQuery}", type: VIDEO, part: SNIPPET, maxResults: 1) {
+          items {
+            id {
+              videoId
+            }
+          }
+        }
+      }
+    `;
 
-    // Use the YouTube Data API to search for the trailer
-    const apiKey = 'AIzaSyC7UEh4uRpo1slT7RB_BNlPMKAAsBQcuRQ';
-    const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?q=${searchQuery}&type=video&part=snippet&key=${apiKey}`
-    );
+    // Set up your GraphQL client with the appropriate endpoint
+    const graphQLClient = new GraphQLClient('https://www.googleapis.com/youtube/v3');
 
-    // Extract the trailer video ID from the API response
-    const trailerVideoId = response.data.items[0]?.id.videoId;
+    // Add your API key to the headers
+    graphQLClient.setHeader('Authorization', 'Bearer AIzaSyC7UEh4uRpo1slT7RB_BNlPMKAAsBQcuRQ');
+
+    // Make the GraphQL query
+    const response = await graphQLClient.request(gqlQuery);
+
+    // Extract the trailer video ID from the GraphQL response
+    const trailerVideoId = response.search.items[0]?.id.videoId;
 
     // Construct the trailer URL
     trailerUrl.value = trailerVideoId ? `https://www.youtube.com/embed/${trailerVideoId}?autoplay=1` : '';
@@ -52,6 +63,7 @@ onMounted(async () => {
   }
 });
 </script>
+
 
 <style scoped>
 .modal {

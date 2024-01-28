@@ -1,22 +1,78 @@
-<!-- Modal.vue -->
 <template>
   <div v-if="modalStore.show" class="modal">
     <div class="modal-content">
       <button @click="closeModal" class="close-button"><p class="font-bold">Close</p></button>
-      <p>Modal Content</p>
+
+      <!-- Debugging: Log trailerKey -->
+      <p>Trailer Key: {{ trailerKey }}</p>
+
+      <!-- Simplified conditional rendering -->
+      <div v-if="trailerKey">
+        <iframe
+          width="560"
+          height="315"
+          :src="`https://www.youtube.com/embed/${trailerKey}`"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div v-else>
+        <p>No trailer available</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import { useModalStore } from '../store/modalStore';
+import { useMovieStore } from '../store/movieStore'; // Import the movie store
 
 const modalStore = useModalStore();
+const movieStore = useMovieStore(); // Use the movie store
+const trailerKey = ref(null);
 
 const closeModal = () => {
   console.log('modal false');
   modalStore.toggleModal(false);
 };
+
+onMounted(async () => {
+  // Fetch movie trailer when modal is opened
+  const movieId = movieStore.queryMovie.id; // Access movie data from movieStore
+  console.log('Movie ID:', movieId); 
+  await fetchTrailer(movieId);
+});
+
+const fetchTrailer = async (movieId) => {
+  const apiKey = '672d8a2f825f32332973ed7e2de2efa1';
+  const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`;
+  
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    console.log('API Response:', data); // Debugging statement
+
+    if (data.results && data.results.length > 0) {
+      console.log('Videos:', data.results); // Debugging statement
+
+      // Check if there's a trailer among the videos
+      const trailer = data.results.find(video => video.type === 'Trailer');
+      
+      if (trailer) {
+        trailerKey.value = trailer.key;
+        console.log('Found Trailer:', trailer); // Debugging statement
+      } else {
+        console.log('No Trailer Found'); // Debugging statement
+      }
+    } else {
+      console.log('No Videos in API Response'); // Debugging statement
+    }
+  } catch (error) {
+    console.error('Error fetching trailer:', error);
+  }
+};;
 </script>
 
 <style scoped>

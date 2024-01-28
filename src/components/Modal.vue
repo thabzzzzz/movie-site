@@ -48,7 +48,11 @@ onMounted(async () => {
     const graphQLClient = new GraphQLClient('/.netlify/functions/youtube-trailer');
 
     // Make the GraphQL query
-    const response = await graphQLClient.request(gqlQuery);
+    const response = await graphQLClient.request(gqlQuery, {
+      headers: {
+        Authorization: 'Bearer AIzaSyC7UEh4uRpo1slT7RB_BNlPMKAAsBQcuRQ', // Replace with your actual API key
+      },
+    });
 
     // Extract the trailer video ID from the GraphQL response
     const trailerVideoId = response.search.items[0]?.id.videoId;

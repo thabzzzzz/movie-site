@@ -4,7 +4,7 @@
       <button @click="closeModal" class="close-button"><p class="font-bold">Close</p></button>
 
       <!-- Debugging: Log trailerKey -->
-      <p>Trailer Key: {{ trailerKey }}</p>
+      
 
       <!-- Simplified conditional rendering -->
       <div v-if="trailerKey">

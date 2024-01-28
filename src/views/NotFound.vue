@@ -1,5 +1,15 @@
 <template>
-    <div class="flex justify-center text-center">
-       Not Found 
+   <div class="flex flex-col items-center">
+    <p class="shrug">¯\_(ツ)_/¯</p>
+    <div>
+        <br>
+      <p class="font-bold">404 Page Not Found</p>
     </div>
+  </div>
+
+   
 </template>
+
+<script setup>
+
+</script>

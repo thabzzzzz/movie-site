@@ -5,9 +5,23 @@
     </h2>
     
     <div class="cartmain mx-20">
-      <button class="secondaryButton mb-5" @click="$router.back()">
-                  Back
-                </button>
+      <div class="buttons-container">
+      <button class="secondaryButton mb-5" @click="$router.back()">Back</button>
+
+      <!-- Float this button to the right -->
+      <!-- ... existing code ... -->
+<!-- ... existing code ... -->
+<button class="secondaryButton mb-5 float-right" style="margin-left: 77%;" @click="toggleRuntimeUnit">
+  {{ runtimeUnit === 'minutes' ? 'Hours' : 'Minutes' }}
+</button>
+<button class="secondaryButton mb-5 float-right" @click="clearBacklog">Empty backlog</button>
+<!-- ... existing code ... -->
+
+<!-- ... existing code ... -->
+
+    </div>
+
+               
       <h3>
         {{ cartItemCount }} {{ itemLabel }}
       </h3>
@@ -54,9 +68,15 @@
 <tr class="total-runtime-row">
     <td colspan="3" class="text-right font-bold">Backlog Watchtime:</td>
     <td class="text-center font-bold">{{ totalRuntime }}</td>
+    
   </tr>
         </tbody>
       </table>
+      <div v-if="cartItems.length === 0" class="flex flex-col items-center if-empty">
+        <p class="shrug">¯\_(ツ)_/¯</p>
+        <br>
+        <p class="font-bold">Looks like your backlog is empty, populate it with movies from the catalogue</p>
+      </div>
     </div>
   </div>
 </template>
@@ -70,9 +90,9 @@ import { ref, onMounted, computed } from 'vue';
 const cartStore = useCartStore();
 const cartItems = ref(cartStore.cart);
 const cartItemRuntime = ref({});
+const runtimeUnit = ref('minutes'); // Default unit is minutes
 
 onMounted(async () => {
- 
   await fetchMovieRuntimes();
 });
 
@@ -89,19 +109,14 @@ async function fetchMovieRuntime(movieId) {
     const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=672d8a2f825f32332973ed7e2de2efa1`);
     const data = await response.json();
 
-    
-    console.log(data);
-
-    
     const index = cartItems.value.findIndex(item => item.product.id === movieId);
     if (index !== -1) {
       const productDetails = cartItems.value[index].product;
       productDetails.runtime = data.runtime || 'N/A';
-      productDetails.genres = data.genres || [];  
-      productDetails.image = `https://image.tmdb.org/t/p/w500/${data.poster_path}` || '';  
+      productDetails.genres = data.genres || [];
+      productDetails.image = `https://image.tmdb.org/t/p/w500/${data.poster_path}` || '';
     }
 
-    
     cartItemRuntime.value[movieId] = data.runtime || 'N/A';
   } catch (error) {
     console.error(`Error fetching movie details for movie ID ${movieId}:`, error);
@@ -119,25 +134,47 @@ const removeFromCart = (movieId) => {
   const index = cartItems.value.findIndex(item => item.product.id === movieId);
   if (index !== -1) {
     cartItems.value.splice(index, 1);
-    // Optionally, you can update your backend or local storage here to persist the changes.
   }
-}
+};
 
-//runtime total
+const formatRuntime = (runtime) => {
+  if (runtimeUnit.value === 'minutes') {
+    return `${runtime} min`;
+  } else {
+    const hours = Math.floor(runtime / 60);
+    const minutes = runtime % 60;
+    return `${hours}h${minutes > 0 ? ` ${minutes} min` : ''}`;
+  }
+};
+
+const formatTotal = (runtime, quantity) => {
+  const total = (runtime || 0) * quantity;
+  return formatRuntime(total);
+};
+
+const toggleRuntimeUnit = () => {
+  runtimeUnit.value = runtimeUnit.value === 'minutes' ? 'hours' : 'minutes';
+};
+
 const totalRuntime = computed(() => {
   let sum = 0;
   for (const cartItem of cartItems.value) {
     const runtime = cartItemRuntime.value[cartItem.product.id] || 0;
     sum += runtime * cartItem.quantity;
   }
-  return sum;
+  return formatRuntime(sum);
 });
 
-
 const updateCartItemQuantity = (cartItem) => {
-  // Update the quantity in the Pinia store
   cartStore.updateCartItemQuantity(cartItem.product.id, cartItem.quantity);
 };
+
+const clearBacklog = () => {
+  while (cartItems.value.length > 0) {
+    removeFromCart(cartItems.value[0].product.id);
+  }
+};
+
 </script>
 
 
@@ -222,4 +259,18 @@ h3 {
   width: 40px;
 
 }
+
+.total-runtime-row{
+  font-size: 30px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.float-right {
+  margin-left: auto; /* This pushes the button to the right */
+}
+
 </style>

@@ -23,6 +23,14 @@
 
           
           </li>
+
+          <li>
+              <a href="mailto:tmosenohi99@gmail.com" target="_blank">
+                <i class="bi bi-envelope-fill"></i>
+              </a>
+          </li>
+
+
           <li>
               <a href="https://twitter.com/callmethabzz" target="_blank">
                 <i class="bi bi-twitter"></i>
@@ -30,8 +38,8 @@
           </li>
          
           <li>
-              <a href="https://www.instagram.com/dudenxtd00r/" target="_blank">
-                <i class="bi bi-instagram"></i>
+              <a href="https://github.com/thabzzzzz" target="_blank">
+                <i class="bi bi-github"></i>
                   
               </a>
           </li>

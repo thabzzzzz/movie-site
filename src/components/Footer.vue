@@ -161,15 +161,15 @@
 
 .footer-basic .social-icons ul li {
   display: inline-block;
-  margin: 10px; /* Adjust margin as needed */
+  margin: 10px; 
 }
 
-/* Media query for screens with a maximum width of 760px */
+
 @media (max-width: 760px) {
   .footer-basic .social-icons ul li {
     display: inline-block;
-    margin: 5px; /* Adjust margin as needed */
-    width: 20%; /* Set width to 50% to have 2 icons in a row */
+    margin: 5px; 
+    width: 20%; 
   }
 }
 

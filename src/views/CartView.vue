@@ -50,7 +50,7 @@
     </div>
   </td>
   <td class="text-center">
-    <!-- Use a number input for the quantity -->
+   
     <input type="number" v-model="cartItem.quantity" @change="updateCartItemQuantity(cartItem)" class="input">
   </td>
 <td class="text-center">{{ cartItemRuntime[cartItem.product.id] || 'N/A' }}</td>
@@ -84,7 +84,7 @@ import { ref, onMounted, computed } from 'vue';
 const cartStore = useCartStore();
 const cartItems = ref(cartStore.cart);
 const cartItemRuntime = ref({});
-const runtimeUnit = ref('minutes'); // Default unit is minutes
+const runtimeUnit = ref('minutes'); 
 
 onMounted(async () => {
   await fetchMovieRuntimes();
@@ -199,8 +199,8 @@ h2 span {
 hr {
   border: none;
   height: 2px;
-  background-color: #858585; /* Change color as needed */
-  margin: 0; /* Remove default margin */
+  background-color: #858585; 
+  margin: 0; 
 }
 
 h3 {
@@ -221,7 +221,7 @@ h3 {
 
 .cart-table th {
   background-color: transparent;
-  color: #858585; /* Set the desired grey color */
+  color: #858585; 
 }
 
 .cart-table .product-details {
@@ -240,7 +240,7 @@ h3 {
   transition: background-color 0.07s ease-in-out;
 }
 
-/* Exclude hover effect for total runtime row */
+
 .cart-table tbody tr.total-runtime-row:hover {
   background-color: initial;
 }
@@ -264,20 +264,20 @@ h3 {
 }
 
 .float-right {
-  margin-left: auto; /* This pushes the button to the right */
+  margin-left: auto; 
 }
 
 @media (max-width: 760px) {
-  /* ... Your existing media query styles ... */
+
   .buttons-container {
     width: 100%;
     display: flex;
-    justify-content: space-between; /* Add this to distribute space between buttons */
+    justify-content: space-between; 
   }
 
   .clear-backlog-button,
   .toggle-runtime-button {
-    margin-right: 20px !important;  /* Adjust the margin as needed */
+    margin-right: 20px !important;  
   }
 
   .cart-table {
@@ -288,7 +288,7 @@ h3 {
 
 
   .cart-table .product-details img {
-    max-width: 200px ; /* Use !important to ensure styles take precedence */
+    max-width: 200px ; 
     width: 100%;
   }
 }

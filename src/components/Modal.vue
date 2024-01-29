@@ -3,10 +3,10 @@
     <div class="modal-content">
       <button @click="closeModal" class="close-button"><p class="font-bold">Close</p></button>
 
-      <!-- Debugging: Log trailerKey -->
+     
       
 
-      <!-- Simplified conditional rendering -->
+    
       <div v-if="trailerKey">
         <iframe
         width="1120"
@@ -26,10 +26,10 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useModalStore } from '../store/modalStore';
-import { useMovieStore } from '../store/movieStore'; // Import the movie store
+import { useMovieStore } from '../store/movieStore'; 
 
 const modalStore = useModalStore();
-const movieStore = useMovieStore(); // Use the movie store
+const movieStore = useMovieStore(); 
 const trailerKey = ref(null);
 
 const closeModal = () => {
@@ -38,8 +38,8 @@ const closeModal = () => {
 };
 
 onMounted(async () => {
-  // Fetch movie trailer when modal is opened
-  const movieId = movieStore.queryMovie.id; // Access movie data from movieStore
+  
+  const movieId = movieStore.queryMovie.id; 
   console.log('Movie ID:', movieId); 
   await fetchTrailer(movieId);
 });
@@ -52,22 +52,22 @@ const fetchTrailer = async (movieId) => {
     const response = await fetch(apiUrl);
     const data = await response.json();
 
-    console.log('API Response:', data); // Debugging statement
+    console.log('API Response:', data); 
 
     if (data.results && data.results.length > 0) {
-      console.log('Videos:', data.results); // Debugging statement
+      console.log('Videos:', data.results); 
 
-      // Check if there's a trailer among the videos
+      
       const trailer = data.results.find(video => video.type === 'Trailer');
       
       if (trailer) {
         trailerKey.value = trailer.key;
-        console.log('Found Trailer:', trailer); // Debugging statement
+        console.log('Found Trailer:', trailer); 
       } else {
-        console.log('No Trailer Found'); // Debugging statement
+        console.log('No Trailer Found'); 
       }
     } else {
-      console.log('No Videos in API Response'); // Debugging statement
+      console.log('No Videos in API Response');
     }
   } catch (error) {
     console.error('Error fetching trailer:', error);
@@ -89,7 +89,7 @@ const fetchTrailer = async (movieId) => {
 }
 
 .modal-content {
-  position: relative; /* Added for proper positioning */
+  position: relative; 
   background: white;
   padding: 40px;
   border-radius: 8px;
@@ -104,14 +104,14 @@ const fetchTrailer = async (movieId) => {
 }
 @media (max-width: 760px) {
   .modal-content {
-    width: 640px; /* Set the desired width */
-    height: 500px; /* Set the desired height for the modal content */
-    max-height: 90vh; /* Set a maximum height to ensure it fits within the viewport */
+    width: 640px; 
+    height: 500px; 
+    max-height: 90vh; 
   }
 
   iframe {
-    width: 100%; /* Make the iframe fill the width of its container */
-    height: 400px; /* Set the desired height for the iframe */
+    width: 100%; 
+    height: 400px; 
   }
 }
 </style>

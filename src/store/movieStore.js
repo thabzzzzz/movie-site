@@ -1,4 +1,4 @@
-// Create a file named movieStore.js
+
 
 import { defineStore } from 'pinia';
 

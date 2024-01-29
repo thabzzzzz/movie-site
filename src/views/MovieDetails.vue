@@ -88,12 +88,12 @@ import { defineProps } from 'vue';
 import Footer from '../components/Footer.vue';
 import Modal from '../components/Modal.vue';
 import { useModalStore } from '../store/modalStore.js';
-import { useMovieStore } from '../store/movieStore.js'; // Import the movie store
+import { useMovieStore } from '../store/movieStore.js';
 
 const modalStore = useModalStore();
-const movieStore = useMovieStore(); // Use the movie store
+const movieStore = useMovieStore(); 
 
-// Use modalStore.show instead of ref(true)
+
 const show = computed(() => modalStore.show);
 
 const openModal = () => {
@@ -135,7 +135,7 @@ const progressBarColor = computed(() => {
 });
 
 const showTrailer = () => {
-  // Logic to show the trailer or open the modal
+  
   showModal.value = true;
 };
 
@@ -149,10 +149,10 @@ onMounted(async () => {
     if (response.ok) {
       queryMovie.value = data;
 
-      // Assuming your API provides average rating out of 10
+     
       userRating.value = data.vote_average;
 
-      // Calculate percentage based on a scale of 10
+      
       userRatingPercentage.value = (userRating.value / 10) * 100;
       movieStore.setQueryMovie(data);
     } else {
@@ -187,7 +187,7 @@ onMounted(async () => {
   .first-col {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Align items in the center horizontally */
+    align-items: center; 
   }
   
   .heading {
@@ -207,16 +207,16 @@ onMounted(async () => {
   .movie-details {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align items to the left */
-    justify-content: flex-end; /* Align to the bottom */
-    align-self: stretch; /* Stretch to the full height of the parent container */
-    height: 600px; /* Set a fixed height or adjust based on your layout */
-    margin-left: 10px; /* Add margin for spacing between image and movie details */
+    align-items: flex-start; 
+    justify-content: flex-end; 
+    align-self: stretch; 
+    height: 600px; 
+    margin-left: 10px; 
   }
   
   .deets {
-    /* Adjust styling for individual items */
-    margin-bottom: 20px; /* Space between items */
+   
+    margin-bottom: 20px; 
   }
   
   p {
@@ -232,7 +232,7 @@ onMounted(async () => {
   }
   @media (max-width: 760px) {
   .grid-cols-2 {
-    grid-template-columns: 1fr; /* Set a single column layout for smaller screens */
+    grid-template-columns: 1fr; 
   }
 
   .first-col, .movie-details {
@@ -241,19 +241,19 @@ onMounted(async () => {
   }
 
   .poster {
-    max-width: 100%; /* Make the poster responsive */
+    max-width: 100%; 
     height: auto;
-    margin-bottom: 20px; /* Add margin for spacing */
+    margin-bottom: 20px; 
   }
 
   .heading {
-    font-size: 40px; /* Adjust font size for smaller screens */
+    font-size: 40px; 
   }
 
-  /* Center the user score */
+  
   .deets {
     text-align: center;
-    margin-bottom: 12px; /* Adjust margin to decrease space */
+    margin-bottom: 12px;
   }
 }
   </style>

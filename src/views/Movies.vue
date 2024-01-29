@@ -20,7 +20,7 @@ const $toast = inject('$toast');
 
 
     onMounted(async () => {
-    const apiKey = '672d8a2f825f32332973ed7e2de2efa1'; // Replace with your actual TMDb API key
+    const apiKey = '672d8a2f825f32332973ed7e2de2efa1'; 
     const apiUrl = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=${apiKey}`;
     
     try {
@@ -37,7 +37,7 @@ const $toast = inject('$toast');
   const filteredMovies = computed(() => {
   const query = searchQuery.value.toLowerCase();
   return movieList.value.filter(movie => {
-    // Filter based on title or any other property you want
+    
     return movie.title.toLowerCase().includes(query);
   });
 });
@@ -55,7 +55,7 @@ const sortMovies = () => {
   } else if (selectedSort.value === 'popularity') {
     movieList.value.sort((a, b) => b.popularity - a.popularity);
   }
-  // Add more conditions for other sorting options
+ 
 
   autoAnimate(container.value);
 };
@@ -83,24 +83,24 @@ const cartItemCount = computed(() => {
 
 const shouldShowTopButton = ref(false);
 
-// Watch for scroll events when the component is mounted
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
 });
 
-// Handle scroll event
+
 const handleScroll = () => {
-  // Show the button once the user scrolls down 100px
+
   console.log('Scroll position:', window.scrollY, 'shouldShowTopButton:', shouldShowTopButton.value);
   shouldShowTopButton.value = window.scrollY > 100;
 };
 
-// Watch for scroll events when the component is updated
+
 onUpdated(() => {
   window.addEventListener('scroll', handleScroll);
 });
 
-// Scroll to the top when the button is clicked
+
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };

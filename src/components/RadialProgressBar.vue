@@ -41,12 +41,12 @@
   const circumference = ref(2 * Math.PI * 45);
   
   watch(() => props.percent, () => {
-    // Recalculate circumference if percent changes
+    
     circumference.value = 2 * Math.PI * 45;
   });
   </script>
   
   <style scoped>
-  /* Add your scoped styles here */
+
   </style>
   

@@ -102,4 +102,16 @@ const fetchTrailer = async (movieId) => {
   cursor: pointer;
   color: #F05E24;
 }
+@media (max-width: 760px) {
+  .modal-content {
+    width: 640px; /* Set the desired width */
+    height: 500px; /* Set the desired height for the modal content */
+    max-height: 90vh; /* Set a maximum height to ensure it fits within the viewport */
+  }
+
+  iframe {
+    width: 100%; /* Make the iframe fill the width of its container */
+    height: 400px; /* Set the desired height for the iframe */
+  }
+}
 </style>

@@ -1,5 +1,5 @@
 <script setup>
-    import { ref, onMounted,computed } from 'vue'
+    import { ref, onMounted,computed,onUpdated  } from 'vue'
    import MovieCard from '../components/MovieCard.vue';
     import autoAnimate from "@formkit/auto-animate"
     import Footer from '../components/Footer.vue'; 
@@ -81,6 +81,30 @@ const cartItemCount = computed(() => {
   return count;
 });
 
+const shouldShowTopButton = ref(false);
+
+// Watch for scroll events when the component is mounted
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+// Handle scroll event
+const handleScroll = () => {
+  // Show the button once the user scrolls down 100px
+  console.log('Scroll position:', window.scrollY, 'shouldShowTopButton:', shouldShowTopButton.value);
+  shouldShowTopButton.value = window.scrollY > 100;
+};
+
+// Watch for scroll events when the component is updated
+onUpdated(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+// Scroll to the top when the button is clicked
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
 
 </script>
 
@@ -122,6 +146,11 @@ const cartItemCount = computed(() => {
       <div class="grid grid-cols-3" ref="container" >
       <MovieCard v-for="movie in filteredMovies" :key="movie.id" :movie="movie"  @addToCart="handleAddToCart"/>
     </div>
+    <button v-show="shouldShowTopButton" @click="scrollToTop" class="top-button">
+  Top
+</button>
+
+
     </div>
     <Footer />
 </template>
@@ -177,5 +206,28 @@ select {
   margin-left: 1200px;
   }
   
-  
+@media (max-width: 760px) {
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .ml-4 {
+    margin-left: 1rem;
+  }
+
+  .cartlink {
+    margin-left: 0; /* Adjust as needed */
+  }
+
+  /* Adjust button styling */
+  div > button.top-button {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
 </style>

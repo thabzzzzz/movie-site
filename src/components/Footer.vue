@@ -50,7 +50,7 @@
       
   </div>
      
-      <p class="copyright">SWRV © 2023</p>
+      <p class="copyright">thabiso © 2023</p>
   </footer>
 </div>
 </template>
@@ -157,6 +157,20 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 30px;
+}
+
+.footer-basic .social-icons ul li {
+  display: inline-block;
+  margin: 10px; /* Adjust margin as needed */
+}
+
+/* Media query for screens with a maximum width of 760px */
+@media (max-width: 760px) {
+  .footer-basic .social-icons ul li {
+    display: inline-block;
+    margin: 5px; /* Adjust margin as needed */
+    width: 20%; /* Set width to 50% to have 2 icons in a row */
+  }
 }
 
 </style>

@@ -73,3 +73,37 @@
     font-size: 7em;
   }
 
+  @media (max-width: 760px) {
+    .grid {
+        grid-template-columns: 1fr; /* Make it a single column layout */
+        gap: 2rem; /* Adjust the gap between items */
+        margin-bottom: 16px; /* Adjust the margin at the bottom */
+    }
+
+    .ml-20 {
+        margin-left: 0; /* Remove left margin for the first div */
+    }
+
+    .mr-5 {
+        margin-right: 0; /* Remove right margin for the second div */
+    }
+
+    h1 {
+        text-align: center; /* Center the heading */
+    }
+
+    img {
+        width: 100%; /* Make the image take 100% width of its container */
+        max-width: 100%; /* Ensure the image doesn't exceed its container */
+        margin: 0 auto; /* Center the image */
+        border-radius: 0; /* Remove border-radius for the image */
+        padding: 15px;
+    }
+    .body-text{
+      padding: 15px ;
+    }
+
+    .home-img{
+      padding: 15px;
+    }
+}

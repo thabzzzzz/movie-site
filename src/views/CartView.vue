@@ -6,20 +6,14 @@
     
     <div class="cartmain mx-20">
       <div class="buttons-container">
-      <button class="secondaryButton mb-5" @click="$router.back()">Back</button>
+    <button class="secondaryButton mb-5 " @click="$router.back()">Back</button>
 
-      <!-- Float this button to the right -->
-      <!-- ... existing code ... -->
-<!-- ... existing code ... -->
-<button class="secondaryButton mb-5 float-right" style="margin-left: 77%;" @click="toggleRuntimeUnit">
-  {{ runtimeUnit === 'minutes' ? 'Hours' : 'Minutes' }}
-</button>
-<button class="secondaryButton mb-5 float-right" @click="clearBacklog">Empty backlog</button>
-<!-- ... existing code ... -->
-
-<!-- ... existing code ... -->
-
-    </div>
+    <button class="secondaryButton mb-5 float-right" @click="clearBacklog">Empty backlog</button>
+    
+    <button class="secondaryButton mb-5 float-right" @click="toggleRuntimeUnit">
+      {{ runtimeUnit === 'minutes' ? 'Hours' : 'Minutes' }}
+    </button>
+  </div>
 
                
       <h3>
@@ -40,8 +34,8 @@
           <tr v-for="cartItem in cartItems" :key="cartItem.product.id">
   <td class="product-details" v-if="cartItem">
     <div class="flex items-center">
-      <div class="w-20">
-        <img class="h-24" :src="cartItem.product.image" :alt="cartItem.product.title">
+      <div class="md:w-20 sm:w-40 ">
+        <img class="h-24 thumb" :src="cartItem.product.image" :alt="cartItem.product.title">
       </div>
       <div class="flex flex-col justify-between ml-4 flex-grow">
         <span class="font-bold text-sm">{{ cartItem.product.title }}</span>
@@ -273,4 +267,29 @@ h3 {
   margin-left: auto; /* This pushes the button to the right */
 }
 
+@media (max-width: 760px) {
+  /* ... Your existing media query styles ... */
+  .buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Add this to distribute space between buttons */
+  }
+
+  .clear-backlog-button,
+  .toggle-runtime-button {
+    margin-right: 20px !important;  /* Adjust the margin as needed */
+  }
+
+  .cart-table {
+    width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  .cart-table .product-details img {
+    max-width: 200px ; /* Use !important to ensure styles take precedence */
+    width: 100%;
+  }
+}
 </style>

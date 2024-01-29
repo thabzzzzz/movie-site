@@ -27,7 +27,8 @@
               <div class="deets">
                 <br /><p>{{ queryMovie.overview }}</p>
                 <br>
-                <div class="flex justify-between mb-1">
+                <div class="flex justify-between mb-1 user-score">
+                  <div>
                   <span class="font-medium"><p class="font-bold">User score: {{ userRating.toFixed(1) }} / 10</p></span>
                 </div>
                 <div class="w-56 bg-gray-200 rounded-full h-2.5 ">
@@ -35,6 +36,7 @@
                     class="h-2.5 rounded-full"
                     :style="{ width: userRatingPercentage + '%', background: progressBarColor }"
                   ></div>
+                </div>
                 </div>
               </div>
               <div class="deets">
@@ -228,6 +230,31 @@ onMounted(async () => {
   p {
     font-family: monsterrat;
   }
- 
+  @media (max-width: 760px) {
+  .grid-cols-2 {
+    grid-template-columns: 1fr; /* Set a single column layout for smaller screens */
+  }
+
+  .first-col, .movie-details {
+    align-items: center;
+    text-align: center;
+  }
+
+  .poster {
+    max-width: 100%; /* Make the poster responsive */
+    height: auto;
+    margin-bottom: 20px; /* Add margin for spacing */
+  }
+
+  .heading {
+    font-size: 40px; /* Adjust font size for smaller screens */
+  }
+
+  /* Center the user score */
+  .deets {
+    text-align: center;
+    margin-bottom: 12px; /* Adjust margin to decrease space */
+  }
+}
   </style>
   

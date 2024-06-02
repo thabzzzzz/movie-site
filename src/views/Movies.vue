@@ -124,7 +124,7 @@ const scrollToTop = () => {
   <option value="rating">Rating</option>
   <option value="release_date">Release Date</option>
   <option value="popularity">Popularity</option>
-  <!-- Add more options as needed -->
+  
 </select>
 
   <label
@@ -187,7 +187,7 @@ h2 span {
   margin-bottom: 40px;
 }
 select {
-    line-height: 1.5; /* Adjust this value to increase/decrease line height */
+    line-height: 1.5; 
   }
 
   #search-box{
@@ -220,10 +220,10 @@ select {
   }
 
   .cartlink {
-    margin-left: 0; /* Adjust as needed */
+    margin-left: 0; 
   }
 
-  /* Adjust button styling */
+ 
   div > button.top-button {
     top: 50%;
     left: 50%;
